@@ -1,7 +1,6 @@
 [Unit]
 Description=Corsair AIO Manual Fan Control
 After=multi-user.target
-After=liquidcfg.service
 StartLimitIntervalSec=0
 
 [Service]
