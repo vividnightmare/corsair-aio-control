@@ -1,0 +1,15 @@
+[Unit]
+Description=Corsair AIO Manual Fan Control
+After=multi-user.target
+After=liquidcfg.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/opt/fanctrl/fanctrl.py
+
+[Install]
+WantedBy=multi-user.target
