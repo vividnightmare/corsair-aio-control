@@ -27,13 +27,9 @@ def enable_control(): system("echo 1 > /sys/class/hwmon/hwmon2/pwm2_enable")
 
 def disable_control(): system("echo 5 > /sys/class/hwmon/hwmon2/pwm2_enable")
 
-def set_fan_speed(speed):
-    system(" ".join(["echo", str(speed), "> /sys/class/hwmon/hwmon2/pwm2"]))
-    return speed
+def set_fan_speed(speed): system(" ".join(["echo", str(speed), "> /sys/class/hwmon/hwmon2/pwm2"]))
 
-def get_fan_speed():
-    temp = check_output("cat /sys/class/hwmon/hwmon2/pwm2", shell=True).decode().strip("\n")
-    return temp
+def get_fan_speed(): return check_output("cat /sys/class/hwmon/hwmon2/pwm2", shell=True).decode().strip("\n")
 
 def get_water_temp(device):
     status = device.get_status()
@@ -62,7 +58,8 @@ def main():
             for key, value in curve.items():
                 if temp >= key:
                     if fans != value:
-                        fans = set_fan_speed(curve[key])
+                        set_fan_speed(curve[key])
+                        fans = curve[key]
                     break
             sleep(1)
     disable_control()
