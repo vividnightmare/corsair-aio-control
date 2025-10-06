@@ -51,7 +51,8 @@ def main():
             device = dev
     if device is False: exit(1)
     with device.connect():
-        device.initialize()
+        device.initialize(pump_mode="balanced")
+		device.set_color("led", "fixed", [[0,0,255]])
         while True:
             temp = get_water_temp(device)
             if temp is None: continue
